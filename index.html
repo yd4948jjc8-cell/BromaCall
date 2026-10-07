@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6c4cff">
+  <title>BromaCall — Llamadas que sorprenden</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f6f5ff;
+      color: #171526;
+    }
+
+    header {
+      background: #ffffff;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e8e6f5;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      color: #6c4cff;
+    }
+
+    .logo span {
+      color: #171526;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 70px 20px 45px;
+      background: linear-gradient(135deg, #6c4cff, #9b6cff);
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 7vw, 68px);
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: clamp(17px, 3vw, 22px);
+      max-width: 650px;
+      margin: auto;
+      opacity: 0.95;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 45px 0 25px;
+      font-size: 30px;
+    }
+
+    .pranks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .prank {
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      transition: 0.2s;
+    }
+
+    .prank:hover {
+      transform: translateY(-3px);
+    }
+
+    .prank.selected {
+      border-color: #6c4cff;
+      box-shadow: 0 8px 30px rgba(108,76,255,0.18);
+    }
+
+    .emoji {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .prank h3 {
+      margin-bottom: 8px;
+    }
+
+    .prank p {
+      color: #6f6b7c;
+      line-height: 1.5;
+    }
+
+    .form-box {
+      background: white;
+      margin: 45px auto;
+      padding: 30px;
+      border-radius: 22px;
+      max-width: 650px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin: 20px 0 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #d9d6e8;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #6c4cff;
+    }
+
+    .price {
+      margin-top: 25px;
+      padding: 18px;
+      background: #f2efff;
+      border-radius: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .consent {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin: 22px 0;
+      color: #555162;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .consent input {
+      width: auto;
+      margin-top: 4px;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      background: #6c4cff;
+      color: white;
+      padding: 17px;
+      border-radius: 13px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #5738e8;
+    }
+
+    #message {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      background: #e9fff0;
+      color: #146b35;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      color: #777383;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 16px 5%;
+      }
+
+      .hero {
+        padding: 55px 18px 40px;
+      }
+
+      .form-box {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Broma<span>Call</span></div>
+</header>
+
+<section class="hero">
+  <h1>Haz que suene el teléfono 😂</h1>
+  <p>
+    Elige una broma y prepara una llamada divertida para alguien que haya
+    aceptado participar.
+  </p>
+</section>
+
+<main class="container">
+
+  <h2 class="section-title">Elige una broma</h2>
+
+  <div class="pranks">
+
+    <div class="prank" onclick="selectPrank(this, 'El falso premio')">
+      <div class="emoji">🎁</div>
+      <h3>El falso premio</h3>
+      <p>Una divertida llamada anunciando un supuesto premio.</p>
+    </div>
+
+    <div class="prank" onclick="selectPrank(this, 'El falso repartidor')">
+      <div class="emoji">📦</div>
+      <h3>El repartidor</h3>
+      <p>Una llamada relacionada con un paquete inesperado.</p>
+    </div>
+
+    <div class="prank" onclick="selectPrank(this, 'La llamada absurda')">
+      <div class="emoji">🤪</div>
+      <h3>La llamada absurda</h3>
+      <p>Una situación completamente inesperada y divertida.</p>
+    </div>
+
+    <div class="prank" onclick="selectPrank(this, 'El susto')">
+      <div class="emoji">👻</div>
+      <h3>El susto</h3>
+      <p>Una llamada misteriosa para provocar un buen susto.</p>
+    </div>
+
+  </div>
+
+  <div class="form-box">
+
+    <h2>Preparar llamada</h2>
+
+    <label>Broma seleccionada</label>
+    <input id="selectedPrank" type="text" value="Ninguna seleccionada" readonly>
+
+    <label for="phone">Número de teléfono</label>
+    <input
+      id="phone"
+      type="tel"
+      placeholder="+34 600 000 000"
+      autocomplete="tel"
+    >
+
+    <div class="price">
+      <span>Precio</span>
+      <span>0,99 €</span>
+    </div>
+
+    <label class="consent">
+      <input type="checkbox" id="consent">
+      <span>
+        Confirmo que tengo autorización para que el destinatario reciba
+        esta llamada.
+      </span>
+    </label>
+
+    <button onclick="prepareCall()">
+      📞 Preparar llamada
+    </button>
+
+    <div id="message"></div>
+
+  </div>
+
+</main>
+
+<footer>
+  © 2026 BromaCall · Servicio de entretenimiento
+</footer>
+
+<script>
+
+  let selected = "";
+
+  function selectPrank(element, prank) {
+
+    document.querySelectorAll(".prank").forEach(card => {
+      card.classList.remove("selected");
+    });
+
+    element.classList.add("selected");
+
+    selected = prank;
+
+    document.getElementById("selectedPrank").value = prank;
+  }
+
+  function prepareCall() {
+
+    const phone = document.getElementById("phone").value.trim();
+    const consent = document.getElementById("consent").checked;
+    const message = document.getElementById("message");
+
+    if (!selected) {
+      alert("Selecciona una broma.");
+      return;
+    }
+
+    if (!phone) {
+      alert("Introduce un número de teléfono.");
+      return;
+    }
+
+    if (!consent) {
+      alert("Debes confirmar que tienes autorización para realizar la llamada.");
+      return;
+    }
+
+    message.style.display = "block";
+
+    message.innerHTML =
+      "✅ ¡Todo preparado!<br><br>" +
+      "La llamada de <strong>" + selected +
+      "</strong> quedará lista para el siguiente paso.";
+
+  }
+
+</script>
+
+</body>
+</html>
