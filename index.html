@@ -1,441 +1,330 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#6c4cff">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6c5ce7">
 
-  <title>BromaCall — Crea llamadas divertidas</title>
+<title>BromaCall — Llamadas de broma</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f6f5ff;
-      color: #171526;
-      line-height: 1.5;
-    }
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:#f6f5ff;
+  color:#202124;
+  min-height:100vh;
+}
 
-    header {
-      background: #ffffff;
-      padding: 18px 6%;
-      border-bottom: 1px solid #e8e6f5;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-    }
+header{
+  background:linear-gradient(135deg,#6c5ce7,#8b7cf6);
+  color:white;
+  padding:45px 20px 55px;
+  text-align:center;
+  border-radius:0 0 30px 30px;
+}
 
-    .logo {
-      font-size: 27px;
-      font-weight: 800;
-      color: #6c4cff;
-    }
+.logo{
+  font-size:38px;
+  font-weight:900;
+  margin-bottom:10px;
+}
 
-    .logo span {
-      color: #171526;
-    }
+header h1{
+  font-size:30px;
+  margin-bottom:12px;
+}
 
-    .hero {
-      text-align: center;
-      padding: 70px 20px 60px;
-      background: linear-gradient(135deg, #6c4cff, #9b6cff);
-      color: white;
-    }
+header p{
+  max-width:600px;
+  margin:auto;
+  font-size:17px;
+  line-height:1.5;
+  opacity:.95;
+}
 
-    .hero h1 {
-      font-size: clamp(38px, 8vw, 68px);
-      line-height: 1.05;
-      margin-bottom: 22px;
-    }
+.container{
+  width:min(900px,92%);
+  margin:-25px auto 50px;
+}
 
-    .hero p {
-      max-width: 720px;
-      margin: auto;
-      font-size: clamp(17px, 3vw, 21px);
-    }
+.card{
+  background:white;
+  border-radius:24px;
+  padding:25px;
+  margin-bottom:20px;
+  box-shadow:0 8px 30px rgba(40,30,100,.08);
+}
 
-    .container {
-      width: min(1050px, 92%);
-      margin: auto;
-    }
+.free{
+  background:#fff5cc;
+  border:2px solid #ffd84d;
+  color:#6a5200;
+  text-align:center;
+  font-weight:800;
+  font-size:18px;
+}
 
-    .free-box {
-      max-width: 700px;
-      margin: 35px auto;
-      padding: 20px;
-      background: #fff4cf;
-      border: 1px solid #f0d77b;
-      border-radius: 18px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: 700;
-    }
+h2{
+  font-size:23px;
+  margin-bottom:18px;
+}
 
-    .section-title {
-      text-align: center;
-      font-size: 32px;
-      margin: 45px 0 25px;
-    }
+label{
+  display:block;
+  font-weight:700;
+  margin:16px 0 7px;
+}
 
-    .pranks {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-    }
+input,select,textarea{
+  width:100%;
+  padding:15px;
+  border:2px solid #e1e1e8;
+  border-radius:14px;
+  font-size:16px;
+  background:#fff;
+  outline:none;
+}
 
-    .prank {
-      background: white;
-      border-radius: 20px;
-      padding: 25px;
-      cursor: pointer;
-      border: 2px solid transparent;
-      box-shadow: 0 8px 25px rgba(0,0,0,.06);
-      transition: .2s;
-    }
+input:focus,select:focus,textarea:focus{
+  border-color:#6c5ce7;
+}
 
-    .prank:hover {
-      transform: translateY(-3px);
-    }
+textarea{
+  min-height:180px;
+  resize:vertical;
+}
 
-    .prank.selected {
-      border-color: #6c4cff;
-      box-shadow: 0 8px 30px rgba(108,76,255,.20);
-    }
+.counter{
+  text-align:right;
+  color:#777;
+  font-size:13px;
+  margin-top:5px;
+}
 
-    .emoji {
-      font-size: 42px;
-      margin-bottom: 12px;
-    }
+.pranks{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+}
 
-    .prank h3 {
-      margin-bottom: 8px;
-    }
+.prank{
+  border:2px solid #e7e4fa;
+  border-radius:17px;
+  padding:18px;
+  cursor:pointer;
+  transition:.2s;
+  background:white;
+}
 
-    .prank p {
-      color: #6f6b7c;
-    }
+.prank:hover{
+  transform:translateY(-2px);
+}
 
-    .form-box {
-      background: white;
-      max-width: 720px;
-      margin: 50px auto;
-      padding: 30px;
-      border-radius: 24px;
-      box-shadow: 0 10px 35px rgba(0,0,0,.08);
-    }
+.prank.active{
+  border-color:#6c5ce7;
+  background:#f0eeff;
+}
 
-    .form-box h2 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
+.prank .emoji{
+  font-size:30px;
+  margin-bottom:8px;
+}
 
-    label {
-      display: block;
-      font-weight: 700;
-      margin: 20px 0 8px;
-    }
+.prank strong{
+  display:block;
+  font-size:17px;
+  margin-bottom:5px;
+}
 
-    input,
-    textarea,
-    select {
-      width: 100%;
-      padding: 15px;
-      border: 1px solid #d9d6e8;
-      border-radius: 12px;
-      font-size: 16px;
-      font-family: inherit;
-      outline: none;
-      background: white;
-    }
+.prank span{
+  color:#777;
+  font-size:14px;
+}
 
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #6c4cff;
-    }
+button{
+  width:100%;
+  border:0;
+  border-radius:15px;
+  padding:16px 20px;
+  font-size:17px;
+  font-weight:800;
+  cursor:pointer;
+}
 
-    textarea {
-      min-height: 130px;
-      resize: vertical;
-    }
+.primary{
+  background:#6c5ce7;
+  color:white;
+}
 
-    .custom-box {
-      margin-top: 28px;
-      padding: 24px;
-      background: #f5f2ff;
-      border-radius: 20px;
-    }
+.primary:hover{
+  background:#5948d8;
+}
 
-    .custom-box h3 {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
+.secondary{
+  background:#eeeaff;
+  color:#5847d2;
+  margin-top:10px;
+}
 
-    .custom-box p {
-      color: #625e70;
-    }
+.price{
+  background:#f3f1ff;
+  border-radius:17px;
+  padding:20px;
+  margin:20px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-    button {
-      width: 100%;
-      border: none;
-      background: #6c4cff;
-      color: white;
-      padding: 17px;
-      border-radius: 13px;
-      font-size: 17px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 20px;
-    }
+.price strong{
+  font-size:25px;
+  color:#5c49dc;
+}
 
-    button:hover {
-      background: #5738e8;
-    }
+.check{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin:20px 0;
+  font-weight:600;
+  line-height:1.4;
+}
 
-    .secondary-button {
-      background: #eae6ff;
-      color: #4c36c9;
-    }
+.check input{
+  width:21px;
+  height:21px;
+  margin-top:2px;
+}
 
-    .secondary-button:hover {
-      background: #ddd7ff;
-    }
+.hidden{
+  display:none;
+}
 
-    .price {
-      margin-top: 28px;
-      padding: 18px;
-      background: #f2efff;
-      border-radius: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 19px;
-      font-weight: 700;
-    }
+.notice{
+  background:#fff8e7;
+  border-left:5px solid #f2bd22;
+  padding:15px;
+  border-radius:10px;
+  line-height:1.5;
+}
 
-    .free {
-      color: #168542;
-    }
+.success{
+  background:#edf9f0;
+  border-left:5px solid #36a269;
+  padding:18px;
+  border-radius:12px;
+  line-height:1.5;
+}
 
-    .paid {
-      color: #6c4cff;
-    }
+.warning{
+  background:#fff0f0;
+  border-left:5px solid #e45b5b;
+  padding:18px;
+  border-radius:12px;
+  line-height:1.5;
+}
 
-    .consent {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      color: #555162;
-      font-size: 14px;
-      line-height: 1.5;
-    }
+footer{
+  text-align:center;
+  padding:30px 20px;
+  color:#777;
+  font-size:13px;
+}
 
-    .consent input {
-      width: auto;
-      margin-top: 4px;
-    }
+@media(max-width:600px){
+  header{
+    padding:35px 18px 45px;
+  }
 
-    .message {
-      display: none;
-      margin-top: 20px;
-      padding: 18px;
-      border-radius: 14px;
-      line-height: 1.6;
-    }
+  .logo{
+    font-size:32px;
+  }
 
-    .success {
-      background: #e9fff0;
-      color: #146b35;
-    }
+  header h1{
+    font-size:26px;
+  }
 
-    .script-box {
-      display: none;
-      margin-top: 25px;
-      padding: 22px;
-      background: #faf9ff;
-      border: 2px solid #ddd7ff;
-      border-radius: 18px;
-    }
+  .container{
+    width:94%;
+  }
 
-    .script-box h3 {
-      margin-bottom: 15px;
-    }
+  .card{
+    padding:20px;
+  }
 
-    #scriptText {
-      min-height: 190px;
-      background: white;
-    }
-
-    .counter {
-      text-align: center;
-      color: #6f6b7c;
-      margin-top: 10px;
-      font-size: 14px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 45px 20px;
-      color: #777383;
-      font-size: 14px;
-    }
-
-    @media (max-width: 600px) {
-
-      .hero {
-        padding: 55px 18px;
-      }
-
-      .form-box {
-        padding: 22px;
-      }
-
-      .custom-box {
-        padding: 20px;
-      }
-
-      .price {
-        font-size: 17px;
-      }
-    }
-  </style>
+  .pranks{
+    grid-template-columns:1fr 1fr;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">
-    Broma<span>Call</span>
-  </div>
-</header>
-
-
-<section class="hero">
-
-  <h1>
-    Haz que suene el teléfono 😂
-  </h1>
-
+  <div class="logo">😂 BromaCall</div>
+  <h1>Haz que suene el teléfono</h1>
   <p>
     Crea una llamada divertida, personalízala y sorprende
     a alguien que haya aceptado participar.
   </p>
-
-</section>
-
+</header>
 
 <main class="container">
 
-
-  <div class="free-box">
-
-    🎁 Tienes
-    <span id="freeCount">1</span>
-    llamada gratis
-
+  <div class="card free">
+    🎁 Tienes 1 llamada gratis
   </div>
 
+  <section class="card">
+    <h2>🎭 Elige una broma</h2>
 
-  <h2 class="section-title">
-    😂 Elige una broma
-  </h2>
+    <div class="pranks">
 
+      <div class="prank active" onclick="selectPrank(this,'Premio')">
+        <div class="emoji">🏆</div>
+        <strong>Has ganado un premio</strong>
+        <span>Una sorpresa inesperada</span>
+      </div>
 
-  <div class="pranks">
+      <div class="prank" onclick="selectPrank(this,'Paquete')">
+        <div class="emoji">📦</div>
+        <strong>Paquete misterioso</strong>
+        <span>Una entrega muy especial</span>
+      </div>
 
+      <div class="prank" onclick="selectPrank(this,'Encuesta')">
+        <div class="emoji">📋</div>
+        <strong>Encuesta absurda</strong>
+        <span>Preguntas inesperadas</span>
+      </div>
 
-    <div
-      class="prank"
-      onclick="selectPrank(this, 'El falso premio')"
-    >
+      <div class="prank" onclick="selectPrank(this,'Restaurante')">
+        <div class="emoji">🍕</div>
+        <strong>Restaurante</strong>
+        <span>Una reserva muy curiosa</span>
+      </div>
 
-      <div class="emoji">🎁</div>
-
-      <h3>
-        El falso premio
-      </h3>
-
-      <p>
-        Una divertida llamada anunciando un supuesto premio.
-      </p>
-
-    </div>
-
-
-    <div
-      class="prank"
-      onclick="selectPrank(this, 'El repartidor')"
-    >
-
-      <div class="emoji">📦</div>
-
-      <h3>
-        El repartidor
-      </h3>
-
-      <p>
-        Una llamada sobre un paquete inesperado.
-      </p>
+      <div class="prank" onclick="selectPrank(this,'Personalizada')">
+        <div class="emoji">✨</div>
+        <strong>Personalizada</strong>
+        <span>Inventa tu propia broma</span>
+      </div>
 
     </div>
+  </section>
 
+  <section class="card">
 
-    <div
-      class="prank"
-      onclick="selectPrank(this, 'La llamada absurda')"
-    >
+    <h2>👤 Datos de la llamada</h2>
 
-      <div class="emoji">🤪</div>
-
-      <h3>
-        La llamada absurda
-      </h3>
-
-      <p>
-        Una situación inesperada y completamente disparatada.
-      </p>
-
-    </div>
-
-
-    <div
-      class="prank"
-      onclick="selectPrank(this, 'El susto')"
-    >
-
-      <div class="emoji">👻</div>
-
-      <h3>
-        El susto
-      </h3>
-
-      <p>
-        Una llamada misteriosa para provocar un susto.
-      </p>
-
-    </div>
-
-
-  </div>
-
-
-  <div class="form-box">
-
-
-    <h2>
-      📞 Preparar llamada
-    </h2>
-
-
-    <label for="name">
-      👤 Nombre de la persona
-    </label>
-
+    <label for="name">Nombre del destinatario</label>
     <input
       id="name"
       type="text"
@@ -443,521 +332,490 @@
       maxlength="40"
     >
 
-
-    <label for="phone">
-      📱 Número de teléfono
-    </label>
-
+    <label for="phone">Número de teléfono</label>
     <input
       id="phone"
       type="tel"
-      placeholder="+34 600 000 000"
-      autocomplete="tel"
+      placeholder="Ejemplo: 600 000 000"
+      maxlength="20"
     >
 
+    <label for="idea">✨ Describe tu broma</label>
 
-    <label for="selectedPrank">
-      😂 Broma seleccionada
-    </label>
+    <textarea
+      id="idea"
+      maxlength="500"
+      placeholder="Ejemplo: quiero hacerle creer que ha ganado un premio de 1.000.000 €"
+    ></textarea>
 
-    <input
-      id="selectedPrank"
-      type="text"
-      value="Ninguna seleccionada"
-      readonly
-    >
-
-
-    <div class="custom-box">
-
-
-      <h3>
-        ✨ Crea tu propia broma
-      </h3>
-
-      <p>
-        Personaliza la situación y genera un guion
-        adaptado a la persona.
-      </p>
-
-
-      <label for="type">
-        Tipo de broma
-      </label>
-
-      <select id="type">
-
-        <option>
-          Graciosa
-        </option>
-
-        <option>
-          Absurda
-        </option>
-
-        <option>
-          Sorpresa
-        </option>
-
-        <option>
-          Susto
-        </option>
-
-        <option>
-          Personalizada
-        </option>
-
-      </select>
-
-
-      <label for="idea">
-        ¿Qué quieres que ocurra?
-      </label>
-
-      <textarea
-        id="idea"
-        maxlength="500"
-        placeholder="Ejemplo: quiero hacerle creer que ha ganado una pizza gratis..."
-      ></textarea>
-
-
-      <div class="counter">
-        Puedes escribir hasta 500 caracteres.
-      </div>
-
-
-      <button
-        type="button"
-        onclick="generatePrank()"
-      >
-        ✨ Generar mi broma
-      </button>
-
-
+    <div class="counter">
+      <span id="count">0</span>/500
     </div>
 
-
-    <div
-      class="script-box"
-      id="scriptBox"
-    >
-
-      <h3>
-        🎬 Tu guion
-      </h3>
-
-      <p>
-        Puedes modificarlo antes de continuar:
-      </p>
-
-      <textarea
-        id="scriptText"
-        maxlength="1500"
-      ></textarea>
-
-      <div class="counter">
-        Puedes editar el guion libremente.
-      </div>
-
-    </div>
-
-
-    <div class="price">
-
-      <span>
-        Precio
-      </span>
-
-      <span
-        id="price"
-        class="free"
-      >
-        GRATIS
-      </span>
-
-    </div>
-
-
-    <label class="consent">
-
-      <input
-        type="checkbox"
-        id="consent"
-      >
-
-      <span>
-        Confirmo que tengo autorización para que
-        el destinatario reciba esta llamada.
-      </span>
-
-    </label>
-
-
-    <button
-      type="button"
-      onclick="prepareCall()"
-    >
-      📞 Continuar
+    <button class="primary" onclick="generatePrank()">
+      ✨ Generar mi broma
     </button>
 
+  </section>
 
-    <div
-      class="message success"
-      id="message"
-    ></div>
+  <section id="scriptSection" class="card hidden">
 
+    <h2>🎬 Tu guion</h2>
 
-  </div>
+    <div class="notice">
+      Puedes modificar el texto antes de continuar.
+    </div>
 
+    <label for="script">Guion de la llamada</label>
+
+    <textarea id="script"></textarea>
+
+    <button class="secondary" onclick="regenerate()">
+      🔄 Generar otro guion
+    </button>
+
+  </section>
+
+  <section id="paymentSection" class="card hidden">
+
+    <h2>💳 Preparar llamada</h2>
+
+    <div id="freeMessage" class="success">
+      🎁 Esta es tu primera llamada y es gratis.
+    </div>
+
+    <div id="paidMessage" class="price hidden">
+      <span>Precio de esta llamada</span>
+      <strong>0,99 €</strong>
+    </div>
+
+    <div class="check">
+      <input id="authorization" type="checkbox">
+      <span>
+        Confirmo que tengo autorización para que el destinatario
+        reciba esta llamada y que la utilizaré de forma responsable.
+      </span>
+    </div>
+
+    <button class="primary" onclick="continueCall()">
+      Continuar
+    </button>
+
+  </section>
+
+  <section id="resultSection" class="card hidden">
+
+    <h2>🎉 Broma preparada</h2>
+
+    <div id="resultBox" class="success"></div>
+
+    <div class="warning" style="margin-top:15px;">
+      ⚠️ Esta versión de BromaCall todavía está en modo demostración.
+      El pago puede realizarse mediante Stripe, pero la llamada telefónica
+      real todavía no se inicia automáticamente.
+    </div>
+
+    <button
+      class="secondary"
+      style="margin-top:15px;"
+      onclick="location.reload()"
+    >
+      🔙 Crear otra broma
+    </button>
+
+  </section>
 
 </main>
 
-
 <footer>
-
-  © 2026 BromaCall · Entretenimiento
-
+  © 2026 BromaCall · Servicio de entretenimiento
 </footer>
-
 
 <script>
 
-  let selected = "";
+/*
+==========================================================
+  CONFIGURACIÓN DE STRIPE
+==========================================================
 
-  const FREE_KEY = "bromacall_free_used";
+  PEGA AQUÍ EL ENLACE QUE COPIASTE DESDE STRIPE.
+
+  Ejemplo:
+
+  const STRIPE_PAYMENT_LINK =
+  "https://buy.stripe.com/xxxxxxxx";
+
+  NO pongas ninguna clave secreta de Stripe aquí.
+==========================================================
+*/
+
+const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/14A4gy5SQ8x6aH74sqa3u02";
 
 
-  function hasFreeCall() {
+let selectedPrank = "Premio";
+let freeCallUsed = localStorage.getItem("bromacall_free_used") === "true";
 
-    return localStorage.getItem(FREE_KEY) !== "true";
+const ideaInput = document.getElementById("idea");
+const count = document.getElementById("count");
+
+ideaInput.addEventListener("input", function(){
+  count.textContent = this.value.length;
+});
+
+
+function selectPrank(element,type){
+
+  document.querySelectorAll(".prank").forEach(function(card){
+    card.classList.remove("active");
+  });
+
+  element.classList.add("active");
+
+  selectedPrank = type;
+
+}
+
+
+function cleanName(name){
+
+  return name
+    .replace(/^se llama\s+/i,"")
+    .replace(/^el destinatario es\s+/i,"")
+    .trim();
+
+}
+
+
+function generatePrank(){
+
+  let name = document.getElementById("name").value.trim();
+  let phone = document.getElementById("phone").value.trim();
+  let idea = document.getElementById("idea").value.trim();
+
+  if(!name){
+    alert("Escribe el nombre del destinatario.");
+    return;
+  }
+
+  if(!phone){
+    alert("Escribe el número de teléfono.");
+    return;
+  }
+
+  if(!idea){
+    alert("Describe brevemente la broma.");
+    return;
+  }
+
+  name = cleanName(name);
+
+  let script = "";
+
+  if(selectedPrank === "Premio"){
+
+    script =
+`Hola, ${name}.
+
+Te llamamos porque tenemos una noticia bastante inesperada.
+
+Según la información que tenemos, has sido seleccionado para recibir una sorpresa especial.
+
+Antes de continuar tenemos que confirmar una cosa...
+
+¿Te esperabas algo así?
+
+${idea}
+
+Gracias por participar en esta pequeña broma de BromaCall. 😂`;
+
+  }
+
+  else if(selectedPrank === "Paquete"){
+
+    script =
+`Hola, ${name}.
+
+Te llamamos porque tenemos registrado un paquete bastante curioso a tu nombre.
+
+El problema es que la descripción del contenido no es precisamente normal.
+
+${idea}
+
+Antes de seguir necesitamos saber si esperabas recibir algo.
+
+Tranquilo, esto forma parte de una broma de BromaCall. 😂`;
+
+  }
+
+  else if(selectedPrank === "Encuesta"){
+
+    script =
+`Hola, ${name}.
+
+Estamos realizando una encuesta muy importante y necesitamos una respuesta rápida.
+
+La pregunta de hoy es:
+
+${idea}
+
+Muchas gracias por tu colaboración.
+
+Y tranquilo... es una broma de BromaCall. 😂`;
+
+  }
+
+  else if(selectedPrank === "Restaurante"){
+
+    script =
+`Hola, ${name}.
+
+Llamamos por una reserva que aparece asociada a tu nombre.
+
+Tenemos una petición bastante curiosa:
+
+${idea}
+
+Antes de continuar queríamos confirmar si realmente eres tú.
+
+Esto forma parte de una broma de BromaCall. 😂`;
+
+  }
+
+  else {
+
+    script =
+`Hola, ${name}.
+
+Tenemos una pequeña sorpresa preparada para ti.
+
+${idea}
+
+Antes de continuar queríamos comprobar tu reacción.
+
+Gracias por participar en BromaCall. 😂`;
+
+  }
+
+  document.getElementById("script").value = script;
+
+  document.getElementById("scriptSection").classList.remove("hidden");
+
+  document.getElementById("paymentSection").classList.remove("hidden");
+
+  updatePaymentState();
+
+  document.getElementById("scriptSection").scrollIntoView({
+    behavior:"smooth"
+  });
+
+}
+
+
+function regenerate(){
+
+  generatePrank();
+
+}
+
+
+function updatePaymentState(){
+
+  const freeMessage =
+    document.getElementById("freeMessage");
+
+  const paidMessage =
+    document.getElementById("paidMessage");
+
+  if(freeCallUsed){
+
+    freeMessage.classList.add("hidden");
+    paidMessage.classList.remove("hidden");
+
+  }else{
+
+    freeMessage.classList.remove("hidden");
+    paidMessage.classList.add("hidden");
+
+  }
+
+}
+
+
+function continueCall(){
+
+  const authorization =
+    document.getElementById("authorization").checked;
+
+  if(!authorization){
+
+    alert(
+      "Debes confirmar que tienes autorización para que el destinatario reciba la llamada."
+    );
+
+    return;
+  }
+
+
+  /*
+    PRIMERA LLAMADA GRATIS
+  */
+
+  if(!freeCallUsed){
+
+    localStorage.setItem("bromacall_free_used","true");
+
+    freeCallUsed = true;
+
+    showDemoResult();
+
+    return;
 
   }
 
 
-  function updatePrice() {
+  /*
+    LLAMADAS POSTERIORES: STRIPE
+  */
 
-    const price =
-      document.getElementById("price");
+  if(
+    !STRIPE_PAYMENT_LINK ||
+    STRIPE_PAYMENT_LINK === "PEGA_AQUI_TU_ENLACE_DE_STRIPE"
+  ){
 
-    const freeCount =
-      document.getElementById("freeCount");
+    alert(
+      "Falta configurar el enlace de pago de Stripe."
+    );
 
-
-    if (hasFreeCall()) {
-
-      price.textContent = "GRATIS";
-      price.className = "free";
-
-      freeCount.textContent = "1";
-
-    } else {
-
-      price.textContent = "0,99 €";
-      price.className = "paid";
-
-      freeCount.textContent = "0";
-
-    }
+    return;
 
   }
 
 
-  function selectPrank(element, prank) {
+  /*
+    Guardamos temporalmente el guion para que podamos
+    recuperarlo después del pago.
+  */
 
-    document
-      .querySelectorAll(".prank")
-      .forEach(card => {
+  localStorage.setItem(
+    "bromacall_pending_script",
+    document.getElementById("script").value
+  );
 
-        card.classList.remove("selected");
+  localStorage.setItem(
+    "bromacall_pending_name",
+    document.getElementById("name").value
+  );
 
-      });
-
-
-    element.classList.add("selected");
-
-
-    selected = prank;
-
-
-    document.getElementById(
-      "selectedPrank"
-    ).value = prank;
-
-
-    document.getElementById(
-      "scriptBox"
-    ).style.display = "none";
-
-  }
+  localStorage.setItem(
+    "bromacall_pending_phone",
+    document.getElementById("phone").value
+  );
 
 
-  function generatePrank() {
+  window.location.href = STRIPE_PAYMENT_LINK;
 
-    const name =
-      document.getElementById("name")
-        .value.trim();
+}
 
 
-    const type =
-      document.getElementById("type")
-        .value;
+function showDemoResult(){
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const resultSection =
+    document.getElementById("resultSection");
+
+  const resultBox =
+    document.getElementById("resultBox");
+
+  resultBox.innerHTML =
+    `
+    🎁 <strong>La primera llamada es gratis.</strong><br><br>
+
+    La broma para <strong>${escapeHtml(name)}</strong>
+    está preparada.
+    `;
+
+  resultSection.classList.remove("hidden");
+
+  resultSection.scrollIntoView({
+    behavior:"smooth"
+  });
+
+}
 
 
-    const idea =
-      document.getElementById("idea")
-        .value.trim();
+function escapeHtml(text){
+
+  const div = document.createElement("div");
+
+  div.textContent = text;
+
+  return div.innerHTML;
+
+}
 
 
-    const scriptBox =
-      document.getElementById("scriptBox");
+/*
+==========================================================
+  CONTROL DE PAGO
+==========================================================
 
+  Esta función permite detectar si Stripe vuelve a enviar
+  al usuario a la página.
 
-    const scriptText =
-      document.getElementById("scriptText");
+  Para producción necesitaremos un backend que confirme
+  realmente el pago antes de iniciar cualquier llamada.
+==========================================================
+*/
 
+const params =
+  new URLSearchParams(window.location.search);
 
-    if (!name) {
+if(
+  params.get("payment") === "success"
+){
 
-      alert(
-        "Primero escribe el nombre de la persona."
-      );
+  const savedName =
+    localStorage.getItem("bromacall_pending_name");
 
-      return;
+  if(savedName){
 
-    }
+    document.getElementById("name").value =
+      savedName;
 
+    document.getElementById("script").value =
+      localStorage.getItem("bromacall_pending_script") || "";
 
-    if (!idea) {
+    document.getElementById("scriptSection")
+      .classList.remove("hidden");
 
-      alert(
-        "Cuéntanos qué quieres que ocurra en la broma."
-      );
+    document.getElementById("paymentSection")
+      .classList.remove("hidden");
 
-      return;
+    document.getElementById("freeMessage")
+      .classList.add("hidden");
 
-    }
+    document.getElementById("paidMessage")
+      .classList.remove("hidden");
 
+    document.getElementById("resultSection")
+      .classList.remove("hidden");
 
-    let script = "";
+    document.getElementById("resultBox").innerHTML =
+      `
+      💳 <strong>Pago realizado.</strong><br><br>
 
-
-    if (type === "Graciosa") {
-
-      script =
-        "Hola, " + name +
-        ". Te llamamos porque tenemos una situación bastante curiosa. " +
-        idea +
-        ". No te preocupes, todo forma parte de una broma de BromaCall. ¡Te hemos pillado! 😂";
-
-    }
-
-
-    else if (type === "Absurda") {
-
-      script =
-        "Hola, " + name +
-        ". Tenemos una información bastante extraña para ti. " +
-        idea +
-        ". Sí, sabemos que suena completamente absurdo... porque lo es. ¡Era una broma de BromaCall! 🤪";
-
-    }
-
-
-    else if (type === "Sorpresa") {
-
-      script =
-        "Hola, " + name +
-        ". Tenemos una pequeña sorpresa para ti. " +
-        idea +
-        ". Antes de que te lo tomes demasiado en serio... ¡era una broma de BromaCall! 🎁";
-
-    }
-
-
-    else if (type === "Susto") {
-
-      script =
-        "Hola, " + name +
-        ". Necesitamos hablar contigo sobre algo que acaba de ocurrir. " +
-        idea +
-        ". Tranquilo, todo esto era una broma de BromaCall. 👻";
-
-    }
-
-
-    else {
-
-      script =
-        "Hola, " + name +
-        ". Tenemos una situación preparada especialmente para ti. " +
-        idea +
-        ". Y ahora viene la parte importante... ¡era una broma de BromaCall! 😂";
-
-    }
-
-
-    scriptText.value = script;
-
-
-    scriptBox.style.display = "block";
-
-
-    scriptBox.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
+      La broma para
+      <strong>${escapeHtml(savedName)}</strong>
+      está preparada.
+      `;
 
   }
 
-
-  function prepareCall() {
-
-    const name =
-      document.getElementById("name")
-        .value.trim();
-
-
-    const phone =
-      document.getElementById("phone")
-        .value.trim();
-
-
-    const consent =
-      document.getElementById("consent")
-        .checked;
-
-
-    const scriptText =
-      document.getElementById("scriptText")
-        .value.trim();
-
-
-    const message =
-      document.getElementById("message");
-
-
-    if (!name) {
-
-      alert(
-        "Escribe el nombre de la persona."
-      );
-
-      return;
-
-    }
-
-
-    if (!phone) {
-
-      alert(
-        "Introduce un número de teléfono."
-      );
-
-      return;
-
-    }
-
-
-    if (!selected) {
-
-      alert(
-        "Selecciona una broma."
-      );
-
-      return;
-
-    }
-
-
-    if (!scriptText) {
-
-      alert(
-        "Genera primero el guion de la broma."
-      );
-
-      return;
-
-    }
-
-
-    if (!consent) {
-
-      alert(
-        "Debes confirmar que tienes autorización para realizar la llamada."
-      );
-
-      return;
-
-    }
-
-
-    if (hasFreeCall()) {
-
-
-      localStorage.setItem(
-        FREE_KEY,
-        "true"
-      );
-
-
-      message.innerHTML =
-        "🎁 <strong>Tu primera llamada es gratis.</strong><br><br>" +
-
-        "La broma para <strong>" +
-        escapeHTML(name) +
-        "</strong> está preparada.<br><br>" +
-
-        "Esta versión es una demostración: " +
-        "todavía no realiza llamadas reales.";
-
-    }
-
-
-    else {
-
-
-      message.innerHTML =
-        "💳 <strong>Esta llamada cuesta 0,99 €.</strong><br><br>" +
-
-        "La broma para <strong>" +
-        escapeHTML(name) +
-        "</strong> está preparada.<br><br>" +
-
-        "Esta versión todavía no procesa pagos ni realiza llamadas reales.";
-
-    }
-
-
-    message.style.display = "block";
-
-
-    updatePrice();
-
-
-    message.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-
-  }
-
-
-  function escapeHTML(text) {
-
-    const div =
-      document.createElement("div");
-
-    div.textContent = text;
-
-    return div.innerHTML;
-
-  }
-
-
-  updatePrice();
+}
 
 </script>
-
 
 </body>
 </html>
